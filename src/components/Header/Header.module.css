@@ -1,0 +1,14 @@
+.window {
+    background-color: #61dafb;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 4rem;
+    color: #282c34;
+    font-weight: bold;
+}
+
+.window_color {
+    color: red;
+}

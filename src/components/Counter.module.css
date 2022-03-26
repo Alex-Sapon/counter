@@ -1,0 +1,18 @@
+.container {
+    max-width: 300px;
+    border: solid 1px lightslategrey;
+    border-radius: 4px;
+    background-color: #282c34;
+    color: honeydew;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    border: solid 2px #61dafb;
+    border-radius: 4px;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}

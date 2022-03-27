@@ -1,11 +1,10 @@
-.container {
-    max-width: 300px;
-    border: solid 1px lightslategrey;
+.container_output {
+    width: 300px;
     border-radius: 4px;
     background-color: #282c34;
     color: honeydew;
-    margin: 1rem auto;
     padding: 1rem;
+    margin: 0 1rem;
 }
 
 .buttons {

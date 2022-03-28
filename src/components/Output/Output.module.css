@@ -12,6 +12,12 @@
     height: 124px;
 }
 
-.output_window_color {
+.output_error {
+    /*background-color: #ff00008a;*/
+    color: crimson;
+    font-size: 1.5rem;
+}
+
+.output_window_limit {
     color: red;
 }

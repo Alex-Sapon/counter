@@ -1,20 +1,27 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import Button from '../UI/Button/Button';
-import styles from './Counter.module.css'
 import Output from './Output/Output';
+import styles from './Counter.module.css'
 
-const Counter = () => {
-    const [value, setValue] = useState<number>(0)
+type CounterProps = {
+    disable?: boolean
+}
 
-    const incrementHandler = () => value <= 5 && setValue(prev => prev + 1) // value <= 5 &&
-    const resetHandler = () => setValue(0)
+const Counter: FC<CounterProps> = ({disable}) => {
+    const maxValue: number = JSON.parse(localStorage.getItem('maxValue') || '0')
+    const startValue: number = JSON.parse(localStorage.getItem('startValue') || '0')
 
-    const incrementValue = value >= 5
-    const resetValue = value < 1 && value < 6
+    const [value, setValue] = useState<number>(startValue)
+
+    const incrementHandler = () => value <= maxValue && setValue(prev => prev + 1)
+    const resetHandler = () => setValue(startValue)
+
+    const incrementValue = value === maxValue || disable
+    const resetValue = value <= maxValue && value === startValue || disable
 
     return (
         <div className={styles.container_output}>
-            <Output value={value}/>
+            <Output value={value} maxValue={maxValue} disable={disable}/>
             <div className={styles.buttons}>
                 <Button disabled={incrementValue} title={'incr'} onClick={incrementHandler}/>
                 <Button disabled={resetValue} title={'reset'} onClick={resetHandler}/>

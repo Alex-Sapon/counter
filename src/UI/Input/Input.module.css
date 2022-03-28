@@ -13,6 +13,9 @@
     --group-color-focus: #fff;
     --group-border-focus: var(--input-border-focus);
     --group-background-focus: #678EFE;
+
+    --input-color-error-bg: rgb(255 0 0 / 53%);;
+    --input-color-error-text: #fff;
 }
 
 .input {
@@ -36,5 +39,9 @@
 
 .input:focus {
     outline: none;
-    border-color: var(--input-border-focus);
+}
+
+.input_error {
+    background-color: var(--input-color-error-bg);
+    color: var(--input-color-error-text);
 }

@@ -3,12 +3,20 @@ import styles from './Output.module.css';
 
 type HeaderProps = {
     value: number
+    maxValue?: number
+    disable?: boolean
 }
 
-const Output: FC<HeaderProps> = ({value}) => {
+const Output: FC<HeaderProps> = ({value, maxValue, disable}) => {
+    const headerStyles = `
+        ${styles.output_window} 
+        ${value === maxValue && styles.output_window_limit}
+        ${disable && styles.output_error}
+    `
+
     return (
-        <div className={`${styles.output_window} ${value === 5 && styles.output_window_color}`}>
-            {value}
+        <div className={headerStyles}>
+            {disable ? 'You entered an invalid value!' : value}
         </div>
     );
 };

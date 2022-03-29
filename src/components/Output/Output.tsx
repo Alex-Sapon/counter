@@ -10,7 +10,7 @@ type HeaderProps = {
 const Output: FC<HeaderProps> = ({value, maxValue, disable}) => {
     const headerStyles = `
         ${styles.output_window} 
-        ${value === maxValue && styles.output_window_limit}
+        ${value === maxValue && styles.output_limit}
         ${disable && styles.output_error}
     `
 

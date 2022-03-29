@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, ChangeEvent} from 'react';
 import Input from '../../UI/Input/Input';
 import styles from './Setter.module.css'
 import Button from '../../UI/Button/Button'
@@ -8,21 +8,12 @@ type SetterProps = {
     maxValue: number
     setMaxValue: (value: number) => void
     setStartValue: (value: number) => void
+    setLocalStorageHandler: () => void
 }
 
-const Setter: FC<SetterProps> = ({startValue, maxValue, setMaxValue, setStartValue}) => {
-    const setLocalStorageHandler = () => {
-        localStorage.setItem('startValue', JSON.stringify(startValue))
-        localStorage.setItem('maxValue', JSON.stringify(maxValue))
-    }
-
-    const onChangeMaxHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setMaxValue(+event.currentTarget.value)
-    }
-
-    const onChangeStartHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setStartValue(+event.currentTarget.value)
-    }
+const Setter: FC<SetterProps> = ({startValue, maxValue, setMaxValue, setStartValue, setLocalStorageHandler}) => {
+    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => setMaxValue(+e.currentTarget.value)
+    const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement>) => setStartValue(+e.currentTarget.value)
 
     const disable = maxValue <= startValue || startValue < 0
 

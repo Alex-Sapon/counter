@@ -13,11 +13,10 @@
 }
 
 .output_error {
-    /*background-color: #ff00008a;*/
     color: crimson;
     font-size: 1.5rem;
 }
 
-.output_window_limit {
+.output_limit {
     color: red;
 }

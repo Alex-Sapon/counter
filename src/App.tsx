@@ -3,14 +3,24 @@ import './App.css';
 import Counter from './components/Counter';
 import Setter from './components/Setter/Setter';
 
-function App() {
-    const [startValue, setStartValue] = useState<number>(0)
-    const [maxValue, setMaxValue] = useState<number>(0)
+const App = () => {
+    const max: number = JSON.parse(localStorage.getItem('maxValue') || '0')
+    const start: number = JSON.parse(localStorage.getItem('startValue') || '0')
+
+    const [maxValue, setMaxValue] = useState<number>(max)
+    const [startValue, setStartValue] = useState<number>(start)
+
+    const setLocalStorageHandler = () => {
+        localStorage.setItem('startValue', JSON.stringify(startValue))
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+        setMaxValue(max)
+        setStartValue(start)
+    }
 
     useEffect(() => {
-        setMaxValue(JSON.parse(localStorage.getItem('maxValue') || '0'))
-        setStartValue(JSON.parse(localStorage.getItem('startValue') || '0'))
-    }, [])
+        setMaxValue(max)
+        setStartValue(start)
+    }, [max, start])
 
     const disable = maxValue <= startValue || startValue < 0
 
@@ -22,8 +32,13 @@ function App() {
                     startValue={startValue}
                     setStartValue={setStartValue}
                     setMaxValue={setMaxValue}
+                    setLocalStorageHandler={setLocalStorageHandler}
                 />
-                <Counter disable={disable}/>
+                <Counter
+                    max={max}
+                    start={start}
+                    disable={disable}
+                />
             </div>
         </div>
     );

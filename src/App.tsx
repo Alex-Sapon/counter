@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import Counter from './components/Counter';
-import Setter from './components/Setter/Setter';
+import {Setter} from './components/Setter/Setter';
 
 const App = () => {
     const max: number = JSON.parse(localStorage.getItem('maxValue') || '0')

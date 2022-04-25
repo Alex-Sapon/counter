@@ -3,7 +3,7 @@ import Input from '../../UI/Input/Input';
 import styles from './Setter.module.css'
 import Button from '../../UI/Button/Button'
 
-type SetterProps = {
+type SetterType = {
     startValue: number
     maxValue: number
     setMaxValue: (value: number) => void
@@ -11,7 +11,7 @@ type SetterProps = {
     setLocalStorageHandler: () => void
 }
 
-const Setter: FC<SetterProps> = ({startValue, maxValue, setMaxValue, setStartValue, setLocalStorageHandler}) => {
+export const Setter: FC<SetterType> = ({startValue, maxValue, setMaxValue, setStartValue, setLocalStorageHandler}) => {
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => setMaxValue(+e.currentTarget.value)
     const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement>) => setStartValue(+e.currentTarget.value)
 
@@ -35,5 +35,3 @@ const Setter: FC<SetterProps> = ({startValue, maxValue, setMaxValue, setStartVal
         </div>
     );
 };
-
-export default Setter;

@@ -1,30 +1,30 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import Button from '../UI/Button/Button';
-import Output from './Output/Output';
+import {Output} from './Output/Output';
 import styles from './Counter.module.css'
+import {useDispatch} from 'react-redux';
+import {incValueAC, resetValueAC} from '../bll/counter-reducer';
+import {loadState} from '../bll/localStorage';
 
 type CounterProps = {
-    max: number
-    start: number
-    disable: boolean
+    minValue: number
+    maxValue: number
 }
 
-const Counter: FC<CounterProps> = ({max, start, disable}) => {
-    const [value, setValue] = useState<number>(start)
+export const Counter: FC<CounterProps> = ({minValue, maxValue}) => {
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        setValue(start)
-    }, [start])
+    const minDefaultValue = loadState()?.counter.minValue!
 
-    const incrementHandler = () => setValue(prev => prev + 1)
-    const resetHandler = () => setValue(start)
+    const incrementHandler = () => dispatch(incValueAC())
+    const resetHandler = () => dispatch(resetValueAC(minDefaultValue))
 
-    const increment = value === max || disable
-    const reset = value <= start && value < max || disable
+    const increment = minValue === maxValue
+    const reset = minValue === minDefaultValue
 
     return (
         <div className={styles.container_output}>
-            <Output value={value} maxValue={max} disable={disable}/>
+            <Output minValue={minValue} maxValue={maxValue} disable={false}/>
             <div className={styles.buttons}>
                 <Button disabled={increment} title={'incr'} onClick={incrementHandler}/>
                 <Button disabled={reset} title={'reset'} onClick={resetHandler}/>
@@ -32,5 +32,3 @@ const Counter: FC<CounterProps> = ({max, start, disable}) => {
         </div>
     );
 };
-
-export default Counter;

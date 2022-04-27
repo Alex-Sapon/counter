@@ -1,22 +1,22 @@
-import React, {FC} from 'react';
+import React from 'react';
 import styles from './Output.module.css';
 
-type HeaderProps = {
+type HeaderType = {
     minValue: number
     maxValue: number
-    disable: boolean
+    isDisable: boolean
 }
 
-export const Output: FC<HeaderProps> = ({minValue, maxValue, disable}) => {
+export const Output = React.memo(({minValue, maxValue, isDisable}: HeaderType) => {    
     const headerStyles = `
         ${styles.output_window} 
         ${minValue === maxValue && styles.output_limit}
-        ${disable && styles.output_error}
+        ${isDisable && styles.output_error}
     `
 
     return (
         <div className={headerStyles}>
-            {disable ? 'You entered an invalid value!' : minValue}
+            {isDisable ? 'You entered an invalid value!' : minValue}
         </div>
     );
-};
+})

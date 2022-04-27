@@ -1,23 +1,19 @@
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import './App.css';
-import { RootStateType } from './bll/store';
-import {Counter} from './components/Counter';
+import {CounterStateType} from './bll/counter-reducer';
+import {RootStateType} from './bll/store';
+import {Counter} from './components/Counter/Counter';
 import {Setter} from './components/Setter/Setter';
 
-const App = () => {
-    const maxValue = useSelector<RootStateType, number>(state => state.counter.maxValue)
-    const minValue = useSelector<RootStateType, number>(state => state.counter.minValue)
-
-    const disable = maxValue <= minValue || minValue < 0
+export const App = () => {    
+    const counter = useSelector<RootStateType, CounterStateType>(state => state.counter)
 
     return (
         <div className="app">
             <div className={'container'}>
-                <Setter disable={disable} minValue={minValue} maxValue={maxValue}/>
-                <Counter minValue={minValue} maxValue={maxValue}/>
+                <Setter minValue={counter.minValue} maxValue={counter.maxValue} isDisable={counter.isDisable}/>
+                <Counter minValue={counter.minValue} maxValue={counter.maxValue} isDisable={counter.isDisable}/>
             </div>
         </div>
-    );
+    )
 }
-
-export default App;

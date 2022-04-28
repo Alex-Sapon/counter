@@ -10,11 +10,5 @@ export type RootStateType = ReturnType<typeof rootReducer>
 
 export const store = createStore(rootReducer, loadState())
 
-// store.subscribe(() => {
-//     saveState({
-//         counter: store.getState().counter
-//     })
-// })
-
 // @ts-ignore
 window.store = store

@@ -2,6 +2,7 @@ import {changeMaxValueAC, changeMinValueAC, counterReducer, CounterStateType, in
 
 test('min value should be incremented plus one', () => {
     const initialState: CounterStateType = {
+        value: 0,
         minValue: 0,
         maxValue: 1,
         isDisable: false
@@ -15,6 +16,7 @@ test('min value should be incremented plus one', () => {
 
 test('min value should be reseted to start min value', () => {
     const initialState: CounterStateType = {
+        value: 0,
         minValue: 5,
         maxValue: 1,
         isDisable: false
@@ -27,6 +29,7 @@ test('min value should be reseted to start min value', () => {
 
 test('min value should be changed', () => {
     const initialState: CounterStateType = {
+        value: 0,
         minValue: 0,
         maxValue: 1,
         isDisable: false
@@ -39,6 +42,7 @@ test('min value should be changed', () => {
 
 test('max value should be changed', () => {
     const initialState: CounterStateType = {
+        value: 0,
         minValue: 0,
         maxValue: 1,
         isDisable: false
@@ -51,6 +55,7 @@ test('max value should be changed', () => {
 
 test('disable should be changed from false to true', () => {
     const initialState: CounterStateType = {
+        value: 0,
         minValue: 0,
         maxValue: 1,
         isDisable: false

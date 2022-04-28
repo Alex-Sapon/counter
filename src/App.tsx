@@ -6,14 +6,14 @@ import {Counter} from './components/Counter/Counter';
 import {Setter} from './components/Setter/Setter';
 
 export const App = () => {    
-    const counter = useSelector<RootStateType, CounterStateType>(state => state.counter)
+    const {value, minValue, maxValue, isDisable} = useSelector<RootStateType, CounterStateType>(state => state.counter);
 
     return (
-        <div className="app">
+        <div className={'app'}>
             <div className={'container'}>
-                <Setter minValue={counter.minValue} maxValue={counter.maxValue} isDisable={counter.isDisable}/>
-                <Counter minValue={counter.minValue} maxValue={counter.maxValue} isDisable={counter.isDisable}/>
+                <Setter minValue={minValue} maxValue={maxValue} isDisable={isDisable}/>
+                <Counter value={value} minValue={minValue} maxValue={maxValue} isDisable={isDisable}/>
             </div>
         </div>
-    )
-}
+    );
+};

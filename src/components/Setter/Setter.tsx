@@ -1,33 +1,39 @@
-import React, {ChangeEvent, useEffect} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
 import Input from '../../UI/Input/Input';
-import styles from './Setter.module.css'
-import Button from '../../UI/Button/Button'
-import {useDispatch} from 'react-redux';
+import Button from '../../UI/Button/Button';
+
 import {saveState} from '../../bll/localStorage';
-import {changeMaxValueAC, changeMinValueAC, isDisableAC, resetValueAC} from '../../bll/counter-reducer';
-import {store} from '../../bll/store';
+import {
+    changeMaxValueAC,
+    changeMinValueAC,
+    CounterStateType,
+    isDisableAC,
+    resetValueAC
+} from '../../bll/counter-reducer';
+import {RootStateType, store} from '../../bll/store';
 
-type SetterType = {
-    minValue: number
-    maxValue: number
-    isDisable: boolean
-};
+import styles from './Setter.module.css';
 
-export const Setter = React.memo(({minValue, maxValue, isDisable} : SetterType) => {
+export const Setter = () => {
+    const {minValue, maxValue, isDisable} = useSelector<RootStateType, CounterStateType>(state => state.counter);
+    const [startValue, setStartValue] = useState<number>(minValue);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        maxValue <= minValue || minValue < 0
-        ? dispatch(isDisableAC(true)) 
-        : dispatch(isDisableAC(false))
-    }, [minValue, maxValue]);
+        maxValue <= startValue || startValue < 0
+            ? dispatch(isDisableAC(true))
+            : dispatch(isDisableAC(false))
+    }, [startValue, maxValue]);
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAC(+e.currentTarget.value));
-    const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAC(+e.currentTarget.value));
+    const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => setStartValue(+e.currentTarget.value);
 
     const setLocalStorageHandler = () => {
-        dispatch(resetValueAC(minValue))
-        saveState({counter: store.getState().counter})
+        dispatch(changeMinValueAC(startValue));
+        dispatch(resetValueAC(startValue));
+        saveState({counter: store.getState().counter});
     };
 
     return (
@@ -39,7 +45,7 @@ export const Setter = React.memo(({minValue, maxValue, isDisable} : SetterType) 
                 </div>
                 <div>
                     <span className={styles.setter_text}>start value:</span>
-                    <Input value={minValue} onChange={onChangeMinHandler} error={isDisable}/>
+                    <Input value={startValue} onChange={onChangeMinHandler} error={isDisable}/>
                 </div>
             </form>
             <div className={styles.setter_buttons}>
@@ -47,4 +53,4 @@ export const Setter = React.memo(({minValue, maxValue, isDisable} : SetterType) 
             </div>
         </div>
     );
-});
+};

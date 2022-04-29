@@ -29,7 +29,7 @@ export const counterReducer = (state: CounterStateType = initialState, action: A
     };
 };
 
-type ActionType = ReturnType<typeof incValueAC> | ReturnType<typeof resetValueAC> 
+export type ActionType = ReturnType<typeof incValueAC> | ReturnType<typeof resetValueAC> 
 | ReturnType<typeof changeMinValueAC> | ReturnType<typeof changeMaxValueAC>
 | ReturnType<typeof isDisableAC>
 

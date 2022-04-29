@@ -5,7 +5,7 @@ type HeaderType = {
     value: number
     maxValue: number
     isDisable: boolean
-}
+};
 
 export const Output = React.memo(({value, maxValue, isDisable}: HeaderType) => {
     const headerStyles = `
@@ -19,4 +19,4 @@ export const Output = React.memo(({value, maxValue, isDisable}: HeaderType) => {
             {isDisable ? 'You entered an invalid value!' : value}
         </div>
     )
-})
+});

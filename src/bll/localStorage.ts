@@ -1,4 +1,4 @@
-import {RootStateType} from "./store"
+import {RootStateType} from "./store";
 
 export const saveState = (state: RootStateType) => {
     try {
@@ -6,7 +6,7 @@ export const saveState = (state: RootStateType) => {
     } catch(error) {
         return undefined
     }
-}
+};
 
 export const loadState = () => {
     try {
@@ -16,4 +16,4 @@ export const loadState = () => {
     } catch(error) {
         return undefined
     }
-}
+};

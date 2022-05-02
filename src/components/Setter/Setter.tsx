@@ -19,19 +19,21 @@ import styles from './Setter.module.css';
 export const Setter = () => {
     const {minValue, maxValue, isDisable} = useSelector<RootStateType, CounterStateType>(state => state.counter);
     const [startValue, setStartValue] = useState<number>(minValue);
+    const [endValue, setEndValue] = useState<number>(maxValue);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        maxValue <= startValue || startValue < 0
+        endValue <= startValue || startValue < 0
             ? dispatch(isDisableAC(true))
             : dispatch(isDisableAC(false))
-    }, [startValue, maxValue]);
+    }, [startValue, endValue]);
 
-    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAC(+e.currentTarget.value));
+    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => setEndValue(+e.currentTarget.value);
     const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => setStartValue(+e.currentTarget.value);
 
     const setLocalStorageHandler = () => {
         dispatch(changeMinValueAC(startValue));
+        dispatch(changeMaxValueAC(endValue));
         dispatch(resetValueAC(startValue));
         saveState({counter: store.getState().counter});
     };
@@ -41,7 +43,7 @@ export const Setter = () => {
             <form className={styles.setter_inputs}>
                 <div>
                     <span className={styles.setter_text}>max value:</span>
-                    <Input value={maxValue} onChange={onChangeMaxHandler} error={isDisable}/>
+                    <Input value={endValue} onChange={onChangeMaxHandler} error={isDisable}/>
                 </div>
                 <div>
                     <span className={styles.setter_text}>start value:</span>

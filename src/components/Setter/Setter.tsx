@@ -28,8 +28,12 @@ export const Setter = () => {
             : dispatch(isDisableAC(false))
     }, [startValue, endValue]);
 
-    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => setEndValue(+e.currentTarget.value);
-    const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => setStartValue(+e.currentTarget.value);
+    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setEndValue(+e.currentTarget.value);
+    };
+    const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setStartValue(+e.currentTarget.value);
+    };
 
     const setLocalStorageHandler = () => {
         dispatch(changeMinValueAC(startValue));
@@ -40,7 +44,7 @@ export const Setter = () => {
 
     return (
         <div className={styles.setter_container}>
-            <form className={styles.setter_inputs}>
+            <div className={styles.setter_inputs}>
                 <div>
                     <span className={styles.setter_text}>max value:</span>
                     <Input value={endValue} onChange={onChangeMaxHandler} error={isDisable}/>
@@ -49,7 +53,7 @@ export const Setter = () => {
                     <span className={styles.setter_text}>start value:</span>
                     <Input value={startValue} onChange={onChangeMinHandler} error={isDisable}/>
                 </div>
-            </form>
+            </div>
             <div className={styles.setter_buttons}>
                 <Button title={'set'} onClick={setLocalStorageHandler} disabled={isDisable}/>
             </div>

@@ -7,12 +7,14 @@ type HeaderType = {
     isDisable: boolean
 };
 
-export const Output = React.memo(({value, maxValue, isDisable}: HeaderType) => {
+export const Output = React.memo((props: HeaderType) => {
+    const {value, maxValue, isDisable} = props;
+
     const headerStyles = `
         ${styles.output_window} 
         ${value === maxValue && styles.output_limit}
         ${isDisable && styles.output_error}
-    `
+    `;
 
     return (
         <div className={headerStyles}>
